@@ -5,6 +5,7 @@
 #include <iostream>
 #include <windows.h>
 #include <string>
+#include <limits>
 #include <algorithm>
 #include <stdio.h>
 #include <ctype.h>
@@ -80,6 +81,7 @@ public:
     void AddPlayer();
     void RemovePlayer();
 	void PlayGame();
+	void Start();
     void Clear();
     
 private:
@@ -119,7 +121,7 @@ void EightBall::RemovePlayer()//removes the Player's object, FREES THE MEMORY
     if (m_pHead == 0) // this function tests m_pHead value
 		{
 			SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-			cout << " This Place Be Empty. Who Am I Gonna Kick Out?!\n";
+			cout << " This Place Is Empty. Who Am I Going To Kick Out?!\n";
 			SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 		}
 
@@ -155,24 +157,33 @@ void EightBall::AddPlayer()// creates a new Player, but ADDS TO END OF LIST
 	cout << "\n  What Is The Name Of The " << PlayerCount << suffix << " Player? : ";
     string name;
     getline(cin, name);
-	++TotalPlayerCount;
-	++PlayerCount;
-    Player* pNewCar = new Player(name); // sets the objects pointer datat to the null pointer
+    Player* pNewPlayer = new Player(name); // sets the objects pointer datat to the null pointer
 	SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
     //if list is empty, make head of list this new Player
     if (m_pHead == 0)
 		{
-			m_pHead = pNewCar;
+			m_pHead = pNewPlayer;
 			m_pTail = (m_pHead + 1);
 		}
     //otherwise find the end of the list and add the Player there
     else
 		{
 		 m_pTail = m_pTail->GetNext();
-		 m_pTail ->SetNext(pNewCar);
+		 m_pTail ->SetNext(pNewPlayer);
 		}
-	m_pTail->SetNext(pNewCar);
+	m_pTail->SetNext(pNewPlayer);
+}
+
+void EightBall::Start()
+{
+	if (TotalPlayerCount < 4)
+	{
+		cout << " \n\t Four Players Must Play. Insert Four Names Please. \n";
+		TotalPlayerCount = 4;
+	}
+
+	
 }
 
 void EightBall::PlayGame()
@@ -204,7 +215,7 @@ void EightBall::PlayGame()
 		cout << "\n Please Pass The Magic EightBall To Player " << PassEightBall << ".....\n";
 		Sleep(2000);
 
-		cout << " Sounds Great. Player " << PassEightBall << " What Is Your Question? ";
+		cout << "\n Sounds Great. Player " << PassEightBall << " What Is Your Question? ";
 		getline(cin, Question);
 		cin.ignore();
 		++PassEightBall;
@@ -264,23 +275,28 @@ int main()
 	cout << "\t Welcome To The Magic EightBall! Where We Tell You Your Future! \n\n";
 	SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
 	cout << " Hello,\n\n My Name Is Moses. I Will Assist You, By Telling Your Fortune. \n"
-		 << " The Rules Are Simple: A Mininum Of 4 Players Can Play. However, You Can Choose Many Many You Want To Play. \n So, Below Please Enter The Number Of Everyone Playing: ";
+		 << " The Rules Are Simple: A Mininum Of 4 Players Can Play.\n\t However, You Can Choose However Many You Want To Play. \n\n So, Below Please Enter The ";
+		SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+		cout << "Number";
+		 SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
+	cout << " Of Everyone Playing: ";
+
 	while(!(cin >> TotalPlayerCount))
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
-			cout << " This Be Incorrect, Try AGAIN! : ";
+			cout << " This Is Incorrect, Try AGAIN! : ";
 		}
+	cin.ignore();
 
-	TotalPlayerCount = ++TotalPlayerCount;
+	myEightBall.Start();
+
 	for ( int i = 0; i < TotalPlayerCount; ++i)
 	{
-		cin.ignore();
-		PlayerCount = TotalPlayerCount;
+		PlayerCount++;
 		myEightBall.AddPlayer();
 	}
-	cout << PlayerCount;
-	cout << TotalPlayerCount;
+	
 
 	cout << "\n Please Wait As The Game Loads...." << endl;
 	Sleep(1000);
@@ -313,8 +329,8 @@ int main()
 
         switch (SlotChosen)
         {
-            case 0: cout << " Nahh My Dude, Disrespect. SMH.\n"; break;
-	        case 1: myEightBall.AddPlayer(); break;  
+            case 0: cout << "\n\t The Game Will Pause... \n\n"; break;
+	        case 1: myEightBall.AddPlayer(); ++TotalPlayerCount; break;  
             case 2: myEightBall.RemovePlayer(); break;
 			case 3: myEightBall.PlayGame(); break;
             case 4: myEightBall.Clear(); break;
