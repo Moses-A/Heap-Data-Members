@@ -297,7 +297,6 @@ int main()
 		myEightBall.AddPlayer();
 	}
 	
-
 	cout << "\n Please Wait As The Game Loads...." << endl;
 	Sleep(1000);
 	SetConsoleTextAttribute(hConsole, 0x0B); // the color dark cyan is used
