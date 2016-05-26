@@ -114,14 +114,25 @@ void PlayGame(vector<string>& PlayerList)
 								 " Defintely, a yes, get too it soon!\n", " I would state the answer is up to you, I say most likely.\n" };
 
 
-	while (ContinuePlay == "y" || ContinuePlay == "Y")
+	while (PassEightBall != TotalPlayerCount)
 	{
 		randomNumber = rand() % 19 + 0;         // random number between 0 and 20
 		SetConsoleTextAttribute(hConsole, 0x0E);
-		cout << "\n Please Pass The Magic EightBall To Player " << PassEightBall << ".....\n";
+		cout << "\n Please Pass The Magic EightBall To Player ";
+		SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
+		cout << PlayerList[PassEightBall];
+		SetConsoleTextAttribute(hConsole, 0x0E);
+		cout << " .....\n";
+
 		Sleep(2000);
 
-		cout << "\n Sounds Great. Player " << PassEightBall << " What Is Your Question? ";
+		cout << "\n Sounds Great. Player ";
+
+		SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
+		cout << PlayerList[PassEightBall];
+		SetConsoleTextAttribute(hConsole, 0x0E);
+		cout << " What Is Your Question? ";
+
 		getline(cin, Question);
 		cin.ignore();
 		++PassEightBall;
@@ -137,12 +148,13 @@ void PlayGame(vector<string>& PlayerList)
 				break;
 			}
 
+	Sleep(1500);
+
 	}
 }
 
 int main()
 {
-	string PlayerName;
 	vector<string> PlayerList;
     int SlotChosen;
     
@@ -159,7 +171,7 @@ int main()
 	while(!(cin >> TotalPlayerCount))
 		{
 			cin.clear();
-			//cin.ignore(numeric_limits<streamsize> max_digits10, '\n');
+			cin.ignore(numeric_limits<streamsize> max_digits10, '\n');
 			cout << " This Is Incorrect, Try AGAIN! : ";
 		}
 
@@ -175,6 +187,14 @@ int main()
 	     << " Pass It To The Next Person, Then Continue. \n";
     do
 	{
+
+		SetConsoleTextAttribute(hConsole, 0x0B); // Sets The Color To cyan
+
+		for (unsigned int i = 0; i < PlayerList.size(); ++i)
+			{
+				cout << "\n Player " << i << ": " << PlayerList[i];
+			}
+
 		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
         cout << "\n\n The Magic EightBall Game\n\n";
@@ -188,16 +208,13 @@ int main()
         SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
 		 
 		cin >> SlotChosen; // grabs the variable of SlotChosen
-
-		if ((!cin) || ((cin !=0) &&
-					(SlotChosen != 1) && (SlotChosen != 2) &&
-				    (SlotChosen != 3) && (SlotChosen != 4) ))
-				{
-					SlotChosen = 0;
-					cout << "\n You Have Lost The Game Already, Great. \n";
-					cin.ignore();
-					cin.get();
-				}
+		
+		while(!(cin >> SlotChosen))
+		{
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize> max_digits10, '\n');
+			cout << " This Is Incorrect, Try AGAIN! : ";
+		}
 
 		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
