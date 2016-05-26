@@ -141,11 +141,11 @@ void EightBall::AddPlayer()// creates a new Player, but ADDS TO END OF LIST
 
 	string suffix;
 
-	if ( PlayerCount == 1 || PlayerCount == 21)
+	if ( PlayerCount == 1 || PlayerCount == 21 || PlayerCount == 31 )
 	{
 		 suffix = "st";
 	}	
-	else if ( PlayerCount == 2 || PlayerCount == 22)
+	else if ( PlayerCount == 2 || PlayerCount == 22 || PlayerCount == 32)
 	{
 		 suffix = "nd";
 	}
