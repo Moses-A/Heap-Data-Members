@@ -4,7 +4,7 @@
 
 
 #include <iostream>
-//#include <windows.h>
+#include <windows.h>
 #include <string>
 #include <limits>
 #include <algorithm>
@@ -23,7 +23,7 @@ vector<string> PlayerList;
 vector<string>::iterator iter;
 
 
-/*WORD GetConsoleTextAttribute (HANDLE hCon)
+WORD GetConsoleTextAttribute (HANDLE hCon)
 {
   CONSOLE_SCREEN_BUFFER_INFO con_info;
   GetConsoleScreenBufferInfo(hCon, &con_info);
@@ -32,13 +32,13 @@ vector<string>::iterator iter;
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 const int saved_colors = GetConsoleTextAttribute(hConsole);
-*/
+
 
 void AddPlayer(vector<string>& PlayerList);
 void AddPlayer(vector<string>& PlayerList)
 {
 
-//    SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+   SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
 
 
     cout << "\n  What Is The Name Of A Player? : ";
@@ -72,8 +72,10 @@ void Start(vector<string>& PlayerList, int& SlotChosen)
         cout << "\nHow many players are there? ";
         cin >> SlotChosen;
     }
+    
     SlotChosen = SlotChosen + 1;
     cin.ignore();
+    
     while ((players != 5) || (players != SlotChosen))
     {
         ++players;
@@ -112,20 +114,20 @@ void PlayGame(vector<string>& PlayerList)
     while (PassEightBall != PlayerList.size())
     {
         randomNumber = rand() % 19 + 0;         // random number between 0 and 20
-//        SetConsoleTextAttribute(hConsole, 0x0E);
+             SetConsoleTextAttribute(hConsole, 0x0E);
         cout << "\n Please Pass The Magic EightBall To Player ";
-//        SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
+             SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
         cout << PlayerList[PassEightBall];
-//        SetConsoleTextAttribute(hConsole, 0x0E);
+             SetConsoleTextAttribute(hConsole, 0x0E);
         cout << " .....\n";
 
-//        Sleep(2000);
+          Sleep(2000);
 
         cout << "\n Sounds Great. Player ";
 
-//        SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
+            SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
         cout << PlayerList[PassEightBall];
-//        SetConsoleTextAttribute(hConsole, 0x0E);
+            SetConsoleTextAttribute(hConsole, 0x0E);
         cout << " What Is Your Question? ";
 
         getline(cin, Question);
@@ -133,17 +135,17 @@ void PlayGame(vector<string>& PlayerList)
         ++PassEightBall;
 
         cout << "\n\n Response: ";
-//        SetConsoleTextAttribute(hConsole, 0x07);
+            SetConsoleTextAttribute(hConsole, 0x07);
         cout << Answers[randomNumber];
 
 
             if (PassEightBall == PlayerList.size())
             {
-//                SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
+                SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
                 break;
             }
 
-//    Sleep(1500);
+      Sleep(1500);
 
     }
 }
@@ -164,6 +166,7 @@ void RemovePlayer(vector<string>& PlayerList)
 
 
     cout << "\n\n Please Insert The Number Of The Person You Want To Delete: ";
+    
     while(!(cin >> number))
         {
             cin.clear();
@@ -171,11 +174,13 @@ void RemovePlayer(vector<string>& PlayerList)
             cout << " This Is Incorrect, Try AGAIN! : ";
         }
 
-        PlayerList.erase(PlayerList.begin()+number-1);
+     PlayerList.erase(PlayerList.begin()+number-1);
+        
     if (PlayerList.size() < number -1 )
     {
         cout << "\n This Is An Incorrect Value.\n";
         cout << "\n\n Please Insert The Number Of The Person You Want To Delete: ";
+        
         while(PlayerList.size() < number)
             {
                 cin >> number;              
@@ -191,27 +196,26 @@ int main()
 
     int SlotChosen;
   
-//    SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
+        SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
     cout << "\t Welcome To The Magic EightBall! Where We Tell You Your Future! \n\n";
-//    SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
+        SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
     cout << " Hello,\n\n My Name Is Moses. I Will Assist You, By Telling Your Fortune. \n"
-         << " The Rules Are Simple: A Mininum Of 4 Players Can Play.\n\t However, You Can Choose However Many You Want To Play. \n\n So, Below Please Enter The ";
-//        SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-        cout << "Number";
-//         SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
+         << " The Rules Are Simple: A Mininum Of 4 Players Can Play.\n\t However, You Can Choose However Many You Want To Play. \n\n So, Below Please Enter The ";        SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+    cout << "Number";
+        SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
     cout << " Of Everyone Playing: ";
 
     Start(PlayerList, SlotChosen);
 
   
     cout << "\n Please Wait As The Game Loads...." << endl;
-//    Sleep(1000);
-//    SetConsoleTextAttribute(hConsole, 0x0B); // the color dark cyan is used
+        Sleep(1000);
+        SetConsoleTextAttribute(hConsole, 0x0B); // the color dark cyan is used
     cout << "\n\t\t Alright, The Rules Of This Game Are Simple. \n Press Number 3, Ask A Question,"
          << " Pass It To The Next Person, Then Continue. \n";
     do
     {    
-//        SetConsoleTextAttribute(hConsole, 0x0B); // Sets The Color To cyan
+           SetConsoleTextAttribute(hConsole, 0x0B); // Sets The Color To cyan
         int i = 1;
         for (iter = PlayerList.begin(); iter != PlayerList.end(); ++iter)
         {
@@ -219,7 +223,7 @@ int main()
             ++i;
         }
 
-//        SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+          SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
         cout << "\n\n The Magic EightBall Game\n\n";
         cout << "\t 0 - Pause The Game. \n";
@@ -229,7 +233,7 @@ int main()
         cout << "\t 4 - Enable Self-Destruction Mode. \n";
         cout << endl << "\t\t Please Enter Your Choice: ";
 
- //       SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+          SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
         
       
         while(!(cin >> SlotChosen))
@@ -239,7 +243,7 @@ int main()
             cout << " This Is Incorrect, Try AGAIN! : ";
         }
 
-//        SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+          SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
         switch (SlotChosen)
         {
