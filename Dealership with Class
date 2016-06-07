@@ -3,7 +3,7 @@
 // Author is Moses Arocha
 
 #include <iostream>
-#include <windows.h>
+#include <windows.h> // a windows only library, displays color in output
 #include <string>
 #include <algorithm>
 #include <stdio.h>
@@ -25,13 +25,14 @@ WORD GetConsoleTextAttribute (HANDLE hCon)
 
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 const int saved_colors = GetConsoleTextAttribute(hConsole);
-// there are two classes within this code, maintain them.
+
+// there are two classes within this code, the goal is to maintain them.
 
 class Car
 {
 
 public: 
-	friend void Peek(const Car& aCar);
+    friend void Peek(const Car& aCar);
     Car(const string& name = "");
     string GetName() const;
     Car* GetNext() const;
@@ -80,12 +81,12 @@ public:
     
 private:
     Car* m_pHead;  // pointer that points to a Car object. THIS IS Dealership CLASS. represents the head of the line
-	Car* m_pTail;
+    Car* m_pTail;
 };
 
 Dealership::Dealership():
     m_pHead(0), // makes it NULL (0)
-	m_pTail(0)
+    m_pTail(0)
 {}
 
 Dealership::~Dealership()
@@ -133,9 +134,9 @@ void Dealership::AddPlayer()// creates a new Car, but ADDS TO END OF LIST
     SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
 	cout << " Give Me A Sec, I Got To Get A 40. I Mean The Papers." << endl;
 	Sleep(5000);
-	cout << "  Sign The Papers,  What You Wanna Name Her? : ";
+    cout << "  Sign The Papers,  What You Wanna Name Her? : ";
     string name;
-    cin >> name;
+    getline(cin, name);
     Car* pNewCar = new Car(name); // sets the objects pointer datat to the null pointer
 	SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
@@ -145,12 +146,14 @@ void Dealership::AddPlayer()// creates a new Car, but ADDS TO END OF LIST
 			m_pHead = pNewCar;
 			m_pTail = (m_pHead + 1);
 		}
+		
     //otherwise find the end of the list and add the Car there
     else
 		{
 		 m_pTail = m_pTail->GetNext();
 		 m_pTail ->SetNext(pNewCar);
 		}
+		
 	m_pTail->SetNext(pNewCar);
 }
 
@@ -170,6 +173,7 @@ ostream& operator<<(ostream& os, const Dealership& aDealership)
 			os << "\n Yoo Fool! The Dealership Is Empty. Fill It Up My Dude! \n";
 			SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 		}
+		
     else
 		{
 		while (pIter != 0)
@@ -195,15 +199,13 @@ int main()
 	cout << "\t The Ghetto Car Dealership, The Chronicles. \n\n";
 	SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
 	cout << " Welcome, My Name Be Caleb. I Will Assist You, Or However You Spell It.\n"
-		 << " What You Want? Hurry Up And Choose! I Ain't Got All Day!\n";
-
-	
+             << " What You Want? Hurry Up And Choose! I Ain't Got All Day!\n";
 
     do
 	{
 		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
-	    cout << myDealership;
+	cout << myDealership;
         cout << "\n\n The Ghetto Car Dealership\n";
         cout << " 0 - Bounce From The Dealership.\n";
         cout << " 1 - Add A Porsche Up In This Place! \n";
@@ -230,7 +232,7 @@ int main()
             case 3: myDealership.Clear(); break;
             default: cout << " Fool, What? You Can't Type! \n";
         }
-	}
+    }
     while (CarChosen != 0);
     
     return 0;
