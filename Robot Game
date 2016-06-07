@@ -105,7 +105,7 @@ int main()
 	while(!(cin >> NewRobotAge))
 		{
 			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
+			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n'); // if max_digits(10) doesn't work, try digits alone
 			cout << " This Is An Invalid Input: ";
 		}
 
