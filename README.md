@@ -1,4 +1,5 @@
 # Heap-Data-Members
-Written in C++
+Basic games written in C++ that attempt to encourage programming.
 
-This is a group of programs written to all perform different tasks, they are all independent of each other, and do not reference each other in anyway.
+Every single C++ file in this repository is independent of each other, unless specified in the comments.
+
