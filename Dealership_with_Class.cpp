@@ -30,18 +30,17 @@ const int saved_colors = GetConsoleTextAttribute(hConsole);
 
 class Car
 {
-
-public: 
-    friend void Peek(const Car& aCar);
-    Car(const string& name = "");
-    string GetName() const;
-    Car* GetNext() const;
-    void SetNext(Car* next);
+	public: 
+		friend void Peek(const Car& aCar);
+    	Car(const string& name = "");
+    	string GetName() const;
+    	Car* GetNext() const;
+    	void SetNext(Car* next);
     
-private:
-    string m_Name;// holds the name of the Car
-    Car* m_pNext;  //Pointer to next Car in list; pointer to Car object
-	                 // means that each Car object can hold a name and point to another Car object
+	private:
+		string m_Name;// holds the name of the Car
+    	Car* m_pNext;  //Pointer to next Car in list; pointer to Car object
+ // means that each Car object can hold a name and point to another Car object
 };
 
 Car::Car(const string& name)://initializes m_Name to a string object based on what's passed
@@ -68,20 +67,20 @@ void Car::SetNext(Car* next)
 // The creation of a NEW CLASS
 class Dealership
 {
-    friend ostream& operator<<(ostream& os, const Dealership& aDealership);
+
+	friend ostream& operator<<(ostream& os, const Dealership& aDealership);
     // called a friend of Dealership so that it is able to send an object to the cout
 
-public:
-	
-    Dealership();
-    ~Dealership();
-    void AddPlayer();
-    void RemovePlayer();
-    void Clear();
+	public:
+    	Dealership();
+		~Dealership();
+		void AddPlayer();
+    	void RemovePlayer();
+    	void Clear();
     
-private:
-    Car* m_pHead;  // pointer that points to a Car object. THIS IS Dealership CLASS. represents the head of the line
-    Car* m_pTail;
+	private:
+    	Car* m_pHead;  // pointer that points to a Car object. THIS IS Dealership CLASS. represents the head of the line
+    	Car* m_pTail;
 };
 
 Dealership::Dealership():
@@ -92,7 +91,7 @@ Dealership::Dealership():
 Dealership::~Dealership()
 {
     Clear();// simply calls the clear function, removing all Car objects from the list, freeing the dynamic memory
-			 // This delete, calls clear function, which calls remove function
+	// This delete, calls clear function, which calls remove function
 }
 
 void Peek(const Car& aCar);
@@ -104,9 +103,9 @@ void Peek(const Car& aCar)
 void Dealership::Clear() // removes all the players from the Dealership
 {
     while (m_pHead != 0) // if the list isn't empty it doesn't enter and skips over
-		{	
-			RemovePlayer(); //calls the remove function
-		}
+	{	
+		RemovePlayer(); //calls the remove function
+	}
 }
 
 void Dealership::RemovePlayer()//removes the Car's object, FREES THE MEMORY
@@ -114,18 +113,17 @@ void Dealership::RemovePlayer()//removes the Car's object, FREES THE MEMORY
 	// if M_PHEAD IS 0, THE Dealership IS EMPTY AND THE FUNCTION STATES IT IS EMPTY.
 	// removes the Car at the head of the line
     if (m_pHead == 0) // this function tests m_pHead value
-		{
-			SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-			cout << " This Place Be Empty. Who Am I Gonna Kick Out?!\n";
-			SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
-		}
-
+	{
+		SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+		cout << " This Place Be Empty. Who Am I Gonna Kick Out?!\n";
+		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+	}
     else
-		{	// the function creates a pointer pTemp, then points it to the first object in the list
-			Car* pTemp = m_pHead; // if there is a place, it deletes the first place on the list
-			m_pHead = m_pHead->GetNext(); // then sets m_pHead to the next thing on the list, either Car of 0
-			//delete pTemp; // this deletes the Car object pointed by pTemp
-		}
+	{	// the function creates a pointer pTemp, then points it to the first object in the list
+		Car* pTemp = m_pHead; // if there is a place, it deletes the first place on the list
+		m_pHead = m_pHead->GetNext(); // then sets m_pHead to the next thing on the list, either Car of 0
+		//delete pTemp; // this deletes the Car object pointed by pTemp
+	}
 }
 
 void Dealership::AddPlayer()// creates a new Car, but ADDS TO END OF LIST
@@ -142,17 +140,16 @@ void Dealership::AddPlayer()// creates a new Car, but ADDS TO END OF LIST
 
     //if list is empty, make head of list this new Car
     if (m_pHead == 0)
-		{
-			m_pHead = pNewCar;
-			m_pTail = (m_pHead + 1);
-		}
-		
+	{
+		m_pHead = pNewCar;
+		m_pTail = (m_pHead + 1);
+	}
     //otherwise find the end of the list and add the Car there
     else
-		{
-		 m_pTail = m_pTail->GetNext();
-		 m_pTail ->SetNext(pNewCar);
-		}
+	{
+	 m_pTail = m_pTail->GetNext();
+	 m_pTail ->SetNext(pNewCar);
+	}
 		
 	m_pTail->SetNext(pNewCar);
 }
@@ -168,24 +165,24 @@ ostream& operator<<(ostream& os, const Dealership& aDealership)
 
     os << "\n\n This Is Who Be Up In This Place: \n";
     if (pIter == 0)
-		{
-			SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-			os << "\n Yoo Fool! The Dealership Is Empty. Fill It Up My Dude! \n";
-			SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
-		}
+	{
+		SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+		os << "\n Yoo Fool! The Dealership Is Empty. Fill It Up My Dude! \n";
+		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+	}
 		
     else
-		{
+	{
 		while (pIter != 0)
-			{   
-				SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
-				Peek(*pIter); // this presents the name
-				cout << endl;
-				//os << pIter->GetName() << endl; // this is the display of the names, why it returns os
-				pIter = pIter->GetNext(); // the function makes the node point to the new Car object on the heap, which then addes the new object to the list   
-				SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
-			}
+		{   
+			SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
+			Peek(*pIter); // this presents the name
+			cout << endl;
+			//os << pIter->GetName() << endl; // this is the display of the names, why it returns os
+			pIter = pIter->GetNext(); // the function makes the node point to the new Car object on the heap, which then addes the new object to the list   
+			SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 		}
+	}
 
     return os;
 }
@@ -203,37 +200,38 @@ int main()
 
     do
 	{
+		
 		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
-
-	cout << myDealership;
-        cout << "\n\n The Ghetto Car Dealership\n";
-        cout << " 0 - Bounce From The Dealership.\n";
-        cout << " 1 - Add A Porsche Up In This Place! \n";
-        cout << " 2 - Sell A Porshce. Then Buy More. \n";
-        cout << " 3 - Set The Place A Blaze. \n";
-        cout << endl << " Please Enter Your Choice: ";
-
-        SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-
+	
+		cout << myDealership;
+	    cout << "\n\n The Ghetto Car Dealership\n";
+	    cout << " 0 - Bounce From The Dealership.\n";
+	    cout << " 1 - Add A Porsche Up In This Place! \n";
+	    cout << " 2 - Sell A Porshce. Then Buy More. \n";
+	    cout << " 3 - Set The Place A Blaze. \n";
+	    cout << endl << " Please Enter Your Choice: ";
+	
+	    SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+	
 		while(!(cin >> CarChosen))
 		{
 			cin.clear();
 			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
 			cout << " This Be Incorrect, Try AGAIN! : ";
 		}
-
+	
 		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
-
-        switch (CarChosen)
-        {
-            case 0: cout << " Nahh My Dude, Disrespect. SMH.\n"; break;
+	
+	    switch (CarChosen)
+	    {
+	        case 0: cout << " Nahh My Dude, Disrespect. SMH.\n"; break;
 	        case 1: myDealership.AddPlayer(); break;  
-            case 2: myDealership.RemovePlayer(); break;
-            case 3: myDealership.Clear(); break;
-            default: cout << " Fool, What? You Can't Type! \n";
-        }
-    }
-    while (CarChosen != 0);
+	        case 2: myDealership.RemovePlayer(); break;
+	        case 3: myDealership.Clear(); break;
+	        default: cout << " Fool, What? You Can't Type! \n";
+		}
+    
+    } while (CarChosen != 0);
     
     return 0;
 }
