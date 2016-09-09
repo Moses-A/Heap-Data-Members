@@ -28,16 +28,16 @@ const int saved_colors = GetConsoleTextAttribute(hConsole);
 
 class Robots
 {
-public: 
-    Robots(const string& name = "", int age = 0);  
-    ~Robots();                   //destructor prototype   
-    Robots(const Robots& c);    //copy constructor prototype
-    Robots& Robots::operator=(const Robots& c);  //overloaded assignment op
-    void Greet() const; 
-
-private:
-    string* m_pName; // this is a pointer to the string object
-    int m_Age;
+	public: 
+	    Robots(const string& name = "", int age = 0);  
+	    ~Robots();                   //destructor prototype   
+	    Robots(const Robots& c);    //copy constructor prototype
+	    Robots& Robots::operator=(const Robots& c);  //overloaded assignment op
+	    void Greet() const; 
+	
+	private:
+	    string* m_pName; // this is a pointer to the string object
+	    int m_Age;
 };
 
 Robots::Robots(const string& name, int age)
