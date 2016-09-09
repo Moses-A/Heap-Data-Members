@@ -66,6 +66,7 @@ void Start(vector<string>& PlayerList, int& SlotChosen)
         cin.ignore(numeric_limits<streamsize>::digits, '\n');
         cout << "\nInvalid input\nTry again: ";
     }
+    
     while (SlotChosen < 4)
     {
         cout << "\nYou must have 4 players\n";
@@ -80,6 +81,7 @@ void Start(vector<string>& PlayerList, int& SlotChosen)
     {
         ++players;
         AddPlayer(PlayerList);
+        
         if ((players == 5 && SlotChosen == 4) || (players == SlotChosen))
         {
             break;
@@ -151,28 +153,27 @@ void PlayGame(vector<string>& PlayerList)
 }
 
 void RemovePlayer(vector<string>& PlayerList);
-
 void RemovePlayer(vector<string>& PlayerList)
 {
     system("cls");
 
     int i = 1;
     int number;
-        for (iter = PlayerList.begin(); iter != PlayerList.end(); ++iter)
-        {
-            cout << "\n Player " << i << ": " << *iter << endl;
-            ++i;
-        }
+    for (iter = PlayerList.begin(); iter != PlayerList.end(); ++iter)
+    {
+        cout << "\n Player " << i << ": " << *iter << endl;
+        ++i;
+    }
 
 
     cout << "\n\n Please Insert The Number Of The Person You Want To Delete: ";
     
     while(!(cin >> number))
-        {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::digits, '\n');
-            cout << " This Is Incorrect, Try AGAIN! : ";
-        }
+    {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::digits, '\n');
+        cout << " This Is Incorrect, Try AGAIN! : ";
+    }
 
      PlayerList.erase(PlayerList.begin()+number-1);
         
@@ -182,9 +183,9 @@ void RemovePlayer(vector<string>& PlayerList)
         cout << "\n\n Please Insert The Number Of The Person You Want To Delete: ";
         
         while(PlayerList.size() < number)
-            {
-                cin >> number;              
-            }
+        {
+            cin >> number;              
+        }
 
     }
 
@@ -192,38 +193,37 @@ void RemovePlayer(vector<string>& PlayerList)
 
 int main()
 {
-  
-
     int SlotChosen;
   
-        SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
+    SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
     cout << "\t Welcome To The Magic EightBall! Where We Tell You Your Future! \n\n";
-        SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
+    SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
     cout << " Hello,\n\n My Name Is Moses. I Will Assist You, By Telling Your Fortune. \n"
          << " The Rules Are Simple: A Mininum Of 4 Players Can Play.\n\t However, You Can Choose However Many You Want To Play. \n\n So, Below Please Enter The ";        SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
     cout << "Number";
-        SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
+    SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
     cout << " Of Everyone Playing: ";
 
     Start(PlayerList, SlotChosen);
 
   
     cout << "\n Please Wait As The Game Loads...." << endl;
-        Sleep(1000);
-        SetConsoleTextAttribute(hConsole, 0x0B); // the color dark cyan is used
+    Sleep(1000);
+    SetConsoleTextAttribute(hConsole, 0x0B); // the color dark cyan is used
     cout << "\n\t\t Alright, The Rules Of This Game Are Simple. \n Press Number 3, Ask A Question,"
          << " Pass It To The Next Person, Then Continue. \n";
     do
     {    
-           SetConsoleTextAttribute(hConsole, 0x0B); // Sets The Color To cyan
+        SetConsoleTextAttribute(hConsole, 0x0B); // Sets The Color To cyan
         int i = 1;
+        
         for (iter = PlayerList.begin(); iter != PlayerList.end(); ++iter)
         {
             cout << "\n Player " << i << ": " << *iter << endl;
             ++i;
         }
 
-          SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+        SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
         cout << "\n\n The Magic EightBall Game\n\n";
         cout << "\t 0 - Pause The Game. \n";
@@ -233,9 +233,8 @@ int main()
         cout << "\t 4 - Enable Self-Destruction Mode. \n";
         cout << endl << "\t\t Please Enter Your Choice: ";
 
-          SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+        SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
         
-      
         while(!(cin >> SlotChosen))
         {
             cin.clear();
@@ -243,7 +242,7 @@ int main()
             cout << " This Is Incorrect, Try AGAIN! : ";
         }
 
-          SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+        SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
         switch (SlotChosen)
         {
@@ -254,8 +253,8 @@ int main()
             case 4: Clear(); SlotChosen = 0; break;
             default: cout << " This Is An Incorrect Entrance. \n";
         }
-    }
-    while (SlotChosen != 0);
+        
+    } while (SlotChosen != 0);
   
     return 0;
 }
