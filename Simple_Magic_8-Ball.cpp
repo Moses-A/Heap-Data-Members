@@ -33,18 +33,17 @@ const int saved_colors = GetConsoleTextAttribute(hConsole);
 
 class Player
 {
-
-public: 
-	friend void Peek(const Player& aPlayer);
-    Player(const string& name = "");
-    string GetName() const;
-    Player* GetNext() const;
-    void SetNext(Player* next);
+	public: 
+    	friend void Peek(const Player& aPlayer);
+		Player(const string& name = "");
+    	string GetName() const;
+    	Player* GetNext() const;
+    	void SetNext(Player* next);
     
-private:
-    string m_Name;// holds the name of the Player
-    Player* m_pNext;  //Pointer to next Player in list; pointer to Player object
-	                 // means that each Player object can hold a name and point to another Player object
+	private:
+    	string m_Name;// holds the name of the Player
+    	Player* m_pNext;  //Pointer to next Player in list; pointer to Player object
+	// means that each Player object can hold a name and point to another Player object
 };
 
 Player::Player(const string& name)://initializes m_Name to a string object based on what's passed
@@ -74,19 +73,18 @@ class EightBall
     friend ostream& operator<<(ostream& os, const EightBall& aEightBall);
     // called a friend of EightBall so that it is able to send an object to the cout
 
-public:
-	
-    EightBall();
-    ~EightBall();
-    void AddPlayer();
-    void RemovePlayer();
-	void PlayGame();
-	void Start();
-    void Clear();
+	public:
+	    EightBall();
+	    ~EightBall();
+	    void AddPlayer();
+	    void RemovePlayer();
+		void PlayGame();
+		void Start();
+	    void Clear();
     
-private:
-    Player* m_pHead;  // pointer that points to a Player object. THIS IS EightBall CLASS. represents the head of the line
-	Player* m_pTail;
+	private:
+	    Player* m_pHead;  // pointer that points to a Player object. THIS IS EightBall CLASS. represents the head of the line
+		Player* m_pTail;
 };
 
 EightBall::EightBall():
@@ -109,9 +107,9 @@ void Peek(const Player& aPlayer)
 void EightBall::Clear() // removes all the players from the EightBall
 {
     while (m_pHead != 0) // if the list isn't empty it doesn't enter and skips over
-		{	
-			RemovePlayer(); //calls the remove function
-		}
+	{	
+		RemovePlayer(); //calls the remove function
+	}
 }
 
 void EightBall::RemovePlayer()//removes the Player's object, FREES THE MEMORY
@@ -119,19 +117,19 @@ void EightBall::RemovePlayer()//removes the Player's object, FREES THE MEMORY
 	// if M_PHEAD IS 0, THE EightBall IS EMPTY AND THE FUNCTION STATES IT IS EMPTY.
 	// removes the Player at the head of the line
     if (m_pHead == 0) // this function tests m_pHead value
-		{
-			SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-			cout << " This Place Is Empty. Who Am I Going To Kick Out?!\n";
-			SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
-		}
+	{
+		SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+		cout << " This Place Is Empty. Who Am I Going To Kick Out?!\n";
+		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+	}
 
     else
-		{	// the function creates a pointer pTemp, then points it to the first object in the list
-			Player* pTemp = m_pHead; // if there is a place, it deletes the first place on the list
-			m_pHead = m_pHead->GetNext(); // then sets m_pHead to the next thing on the list, either Player of 0
-			//delete pTemp; // this deletes the Player object pointed by pTemp
-			--TotalPlayerCount;
-		}
+	{	// the function creates a pointer pTemp, then points it to the first object in the list
+		Player* pTemp = m_pHead; // if there is a place, it deletes the first place on the list
+		m_pHead = m_pHead->GetNext(); // then sets m_pHead to the next thing on the list, either Player of 0
+		//delete pTemp; // this deletes the Player object pointed by pTemp
+		--TotalPlayerCount;
+	}
 }
 
 void EightBall::AddPlayer()// creates a new Player, but ADDS TO END OF LIST
@@ -162,16 +160,16 @@ void EightBall::AddPlayer()// creates a new Player, but ADDS TO END OF LIST
 
     //if list is empty, make head of list this new Player
     if (m_pHead == 0)
-		{
-			m_pHead = pNewPlayer;
-			m_pTail = (m_pHead + 1);
-		}
+	{
+		m_pHead = pNewPlayer;
+		m_pTail = (m_pHead + 1);
+	}
     //otherwise find the end of the list and add the Player there
     else
-		{
-		 m_pTail = m_pTail->GetNext();
-		 m_pTail ->SetNext(pNewPlayer);
-		}
+	{
+	 	m_pTail = m_pTail->GetNext();
+		m_pTail ->SetNext(pNewPlayer);
+	}
 	m_pTail->SetNext(pNewPlayer);
 }
 
@@ -230,7 +228,6 @@ void EightBall::PlayGame()
 				SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
 				break;
 			}
-
 	}
 }
 
@@ -245,23 +242,23 @@ ostream& operator<<(ostream& os, const EightBall& aEightBall)
 
     os << "\n\n This Is The List Of Everyone Playing: \n";
     if (pIter == 0)
-		{
-			SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-			os << "\n Uh-oh. I Have Encountered An Issue. No One Is Playing. \n";
+	{
+		SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+		os << "\n Uh-oh. I Have Encountered An Issue. No One Is Playing. \n";
+		SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
+	}
+    else
+	{
+		while (pIter != 0)
+		{   
+			SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
+			Peek(*pIter); // this presents the name
+			cout << endl;
+			//os << pIter->GetName() << endl; // this is the display of the names, why it returns os
+			pIter = pIter->GetNext(); // the function makes the node point to the new Player object on the heap, which then addes the new object to the list   
 			SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 		}
-    else
-		{
-		while (pIter != 0)
-			{   
-				SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
-				Peek(*pIter); // this presents the name
-				cout << endl;
-				//os << pIter->GetName() << endl; // this is the display of the names, why it returns os
-				pIter = pIter->GetNext(); // the function makes the node point to the new Player object on the heap, which then addes the new object to the list   
-				SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
-			}
-		}
+	}
 
     return os;
 }
@@ -276,17 +273,17 @@ int main()
 	SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
 	cout << " Hello,\n\n My Name Is Moses. I Will Assist You, By Telling Your Fortune. \n"
 		 << " The Rules Are Simple: A Mininum Of 4 Players Can Play.\n\t However, You Can Choose However Many You Want To Play. \n\n So, Below Please Enter The ";
-		SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-		cout << "Number";
-		 SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
+	SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
+	cout << "Number";
+	SetConsoleTextAttribute(hConsole, 0x0A); // the color green is used
 	cout << " Of Everyone Playing: ";
 
 	while(!(cin >> TotalPlayerCount))
-		{
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
-			cout << " This Is Incorrect, Try AGAIN! : ";
-		}
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
+		cout << " This Is Incorrect, Try AGAIN! : ";
+	}
 	cin.ignore();
 
 	myEightBall.Start();
