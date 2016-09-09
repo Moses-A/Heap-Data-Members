@@ -40,7 +40,6 @@ void AddPlayer(vector<string>& PlayerList)
 
    SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
 
-
     cout << "\n  What Is The Name Of A Player? : ";
     string name;
     getline(cin, name);
@@ -60,7 +59,7 @@ void Start(vector<string>& PlayerList, int& SlotChosen)
 {
     int players = 1;
  
-     while(!(cin >> SlotChosen))
+    while(!(cin >> SlotChosen))
     {
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::digits, '\n');
@@ -116,20 +115,20 @@ void PlayGame(vector<string>& PlayerList)
     while (PassEightBall != PlayerList.size())
     {
         randomNumber = rand() % 19 + 0;         // random number between 0 and 20
-             SetConsoleTextAttribute(hConsole, 0x0E);
+        SetConsoleTextAttribute(hConsole, 0x0E);
         cout << "\n Please Pass The Magic EightBall To Player ";
-             SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
+        SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
         cout << PlayerList[PassEightBall];
-             SetConsoleTextAttribute(hConsole, 0x0E);
+        SetConsoleTextAttribute(hConsole, 0x0E);
         cout << " .....\n";
 
           Sleep(2000);
 
         cout << "\n Sounds Great. Player ";
 
-            SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
+        SetConsoleTextAttribute(hConsole, 0x0D); // Sets The Color To purple
         cout << PlayerList[PassEightBall];
-            SetConsoleTextAttribute(hConsole, 0x0E);
+        SetConsoleTextAttribute(hConsole, 0x0E);
         cout << " What Is Your Question? ";
 
         getline(cin, Question);
@@ -137,15 +136,14 @@ void PlayGame(vector<string>& PlayerList)
         ++PassEightBall;
 
         cout << "\n\n Response: ";
-            SetConsoleTextAttribute(hConsole, 0x07);
+        SetConsoleTextAttribute(hConsole, 0x07);
         cout << Answers[randomNumber];
 
-
-            if (PassEightBall == PlayerList.size())
-            {
-                SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
-                break;
-            }
+        if (PassEightBall == PlayerList.size())
+        {
+            SetConsoleTextAttribute(hConsole, 0x0C); // Sets The Color To Gray
+            break;
+        }
 
       Sleep(1500);
 
@@ -159,12 +157,12 @@ void RemovePlayer(vector<string>& PlayerList)
 
     int i = 1;
     int number;
+    
     for (iter = PlayerList.begin(); iter != PlayerList.end(); ++iter)
     {
         cout << "\n Player " << i << ": " << *iter << endl;
         ++i;
     }
-
 
     cout << "\n\n Please Insert The Number Of The Person You Want To Delete: ";
     
@@ -175,7 +173,7 @@ void RemovePlayer(vector<string>& PlayerList)
         cout << " This Is Incorrect, Try AGAIN! : ";
     }
 
-     PlayerList.erase(PlayerList.begin()+number-1);
+    PlayerList.erase(PlayerList.begin()+number-1);
         
     if (PlayerList.size() < number -1 )
     {
