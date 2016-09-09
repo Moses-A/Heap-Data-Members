@@ -90,11 +90,11 @@ int main()
 	SetConsoleTextAttribute(hConsole, 0x08); // Sets The Color To Gray
 
 	string NewRobotName;
-	int NewRobotAge;
+	nt NewRobotAge;
 
-    testDestructor();
-    cout << endl;
-    
+	testDestructor();
+	cout << endl;
+	
 	cout << "\n The Last Robot Was Defective. Please Create A New One.\n";
 	cin.ignore();
 	cout << " What Would You Like To Name The New Robot? : ";
@@ -103,21 +103,21 @@ int main()
 	cout << "\n Please Enter How Old " << NewRobotName << " Is: ";
 
 	while(!(cin >> NewRobotAge))
-		{
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n'); // if max_digits(10) doesn't work, try digits alone
-			cout << " This Is An Invalid Input: ";
-		}
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max_digits10, '\n'); // if max_digits(10) doesn't work, try digits alone
+		cout << " This Is An Invalid Input: ";
+	}
 
-    Robots rob(NewRobotName, NewRobotAge); // this is the different treatment of data, with age
-    rob.Greet();
+	Robots rob(NewRobotName, NewRobotAge); // this is the different treatment of data, with age
+	rob.Greet();
 
-    testCopyConstructor(rob); // the copying of the newly defined robot
-    rob.Greet();
-    cout << endl;
-    cout << " We Must Delete That Robot. It Was Evil...\n\n";
+	testCopyConstructor(rob); // the copying of the newly defined robot
+	rob.Greet();
+	cout << endl;
+	cout << " We Must Delete That Robot. It Was Evil...\n\n";
 
-    testAssignmentOp();
+	testAssignmentOp();
 
     return 0;
 }
@@ -133,11 +133,11 @@ void testDestructor()
 	cout << "\n Please Enter How Old " << RobotName << " Is: ";
 
 	while(!(cin >> RobotAge))
-		{
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
-			cout << " This Is An Invalid Input: ";
-		}
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
+		cout << " This Is An Invalid Input: ";
+	}
 
     Robots toDestroy(RobotName, RobotAge); // string variable is stored on the Heap; string object
     toDestroy.Greet(); // shoots over to the Greet function in the toDestroy
@@ -161,11 +161,11 @@ void testAssignmentOp()
 	cout << "\n Please Enter How Old " << RobotNameTry << " Is: ";
 
 	while(!(cin >> RobotAgeTry))
-		{
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
-			cout << " This Is An Invalid Input: ";
-		}
+	{
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max_digits10, '\n');
+		cout << " This Is An Invalid Input: ";
+	}
 
     Robots rob1(RobotNameTry, RobotAgeTry);
     Robots rob2("rob2", 9);
