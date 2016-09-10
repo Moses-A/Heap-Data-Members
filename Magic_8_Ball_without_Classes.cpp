@@ -1,5 +1,5 @@
 //Game Magic 8 Ball
-//Simulates a game   where players wait
+//Command Line Based Classic Magic 8 Ball Game
 // Author is Moses Arocha
 
 
@@ -39,7 +39,6 @@ void AddPlayer(vector<string>& PlayerList)
 {
 
    SetConsoleTextAttribute(hConsole, 0x0D); // the color magenta is used
-
     cout << "\n  What Is The Name Of A Player? : ";
     string name;
     getline(cin, name);
